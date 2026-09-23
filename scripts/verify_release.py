@@ -10,10 +10,13 @@ import hashlib
 import json
 import math
 import random
+import tarfile
+from decimal import Decimal
 from pathlib import Path
 
 from jevbench.config import DATASET_ORDER
 from jevbench.statistics import macro_interval, mcnemar_exact, paired_interval, permutation_p
+from jevbench.metrics import percentile
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -80,7 +83,45 @@ def verify() -> None:
         eq(sum(x["difference_candidate_minus_jev"] for x in by_results)/5, comp["difference_candidate_minus_jev"], f"{model}.difference")
         eq(permutation_p(pairs, rng, draws), comp["permutation_p"], f"{model}.permutation")
         eq(macro_interval(pairs, rng, draws), comp["paired_stratified_bootstrap_95_ci"], f"{model}.macro_ci")
-    print("Verified 1,050 paired rows, all model scores, per-dataset intervals, McNemar tests, and macro intervals/p-values.")
+    billing = json.loads((ROOT / "results" / "billing_evidence.json").read_text())
+    efficiency = json.loads((ROOT / "results" / "efficiency.json").read_text())
+    by_model = {r["model"]: r for r in efficiency["rows"]}
+    if set(by_model) != set(models):
+        raise AssertionError("efficiency model set differs from statistics")
+    with tarfile.open(ROOT / "results" / "raw-complete.tar.gz", "r:gz") as archive:
+        for model in models:
+            raw = []
+            for ds in DATASET_ORDER:
+                member = archive.extractfile(f"results/raw/{ds}__{model}.jsonl")
+                if member is None:
+                    raise AssertionError(f"raw archive missing {ds}/{model}")
+                raw.extend(json.loads(line) for line in member)
+            if len(raw) != 1050:
+                raise AssertionError(f"raw archive has {len(raw)} rows for {model}")
+            published = by_model[model]
+            input_tokens = sum(int(r.get("tokens_in") or 0) for r in raw)
+            output_tokens = sum(int(r.get("tokens_out") or 0) for r in raw)
+            latencies = [float(r["latency_ms"]) for r in raw if r.get("latency_ms") is not None]
+            eq(input_tokens, published["input_tokens"], f"{model}.input_tokens")
+            eq(output_tokens, published["output_tokens"], f"{model}.output_tokens")
+            eq(len(latencies), published["latency_observations"], f"{model}.latency_count")
+            eq(percentile(latencies, 50), published["latency_p50_ms"], f"{model}.latency_p50")
+            if model == "jev":
+                cost = Decimal(billing["jev"]["matched_cost_usd"]) * Decimal(billing["fx"]["usd_cny"])
+                eq(input_tokens, 1222683, "jev.matched_input_tokens")
+                eq(output_tokens, 523259, "jev.matched_output_tokens")
+            elif model in billing["qwen"]["rates"]:
+                rate = billing["qwen"]["rates"][model]
+                cost = (Decimal(input_tokens) * Decimal(rate["input_cny_per_k_tokens"]) +
+                        Decimal(output_tokens) * Decimal(rate["output_cny_per_k_tokens"])) / 1000
+                check = billing["qwen"]["account_checks"][model]
+                if input_tokens > check["billed_input_tokens"] or output_tokens > check["billed_output_tokens"]:
+                    raise AssertionError(f"{model} benchmark use exceeds account bill")
+            else:
+                cost = None
+            eq(float(cost) if cost is not None else None, published["benchmark_cost_cny"], f"{model}.total_cny")
+            eq(float(cost * 1000 / 1050) if cost is not None else None, published["cny_per_1000_items"], f"{model}.cny_per_1000")
+    print("Verified 1,050 paired rows, scores, intervals, tests, and archived token/latency/cost figures.")
 
 
 if __name__ == "__main__":

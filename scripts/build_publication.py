@@ -8,6 +8,7 @@ from __future__ import annotations
 import csv
 import json
 import statistics
+from decimal import Decimal
 from html import escape
 from pathlib import Path
 
@@ -123,28 +124,85 @@ def build_reanalysis() -> list[dict[str, str]]:
 
 
 def build_efficiency() -> list[dict]:
-    summary = json.loads((ROOT / "results" / "summary_merged.json").read_text())
+    billing = json.loads((ROOT / "results" / "billing_evidence.json").read_text())
+    assert billing["jev"]["matched_calls"] == 1050
     rows = []
     for model in MODELS:
         lats: list[float] = []
+        raw = []
         for ds in DATASET_ORDER:
-            lats.extend(float(row["latency_ms"]) for row in read_jsonl(ROOT / "results" / "raw" / f"{ds}__{model}.jsonl") if row.get("latency_ms") is not None)
-        summaries = [x for x in summary["rows"] if x["model"]["id"] == model]
-        assert len(summaries) == len(DATASET_ORDER)
-        costs = [x["cost"]["total_usd"] for x in summaries]
+            raw.extend(read_jsonl(ROOT / "results" / "raw" / f"{ds}__{model}.jsonl"))
+        assert len(raw) == 1050
+        lats = [float(row["latency_ms"]) for row in raw if row.get("latency_ms") is not None]
+        tokens_in = sum(int(row.get("tokens_in") or 0) for row in raw)
+        tokens_out = sum(int(row.get("tokens_out") or 0) for row in raw)
+        if model == "jev":
+            total_usd = Decimal(billing["jev"]["matched_cost_usd"])
+            total_cny = total_usd * Decimal(billing["fx"]["usd_cny"])
+            method = "matched OpenRouter activity costs, then 2026-09-22 USD/CNY midpoint"
+        elif model in billing["qwen"]["rates"]:
+            rate = billing["qwen"]["rates"][model]
+            total_cny = (Decimal(tokens_in) * Decimal(rate["input_cny_per_k_tokens"]) +
+                         Decimal(tokens_out) * Decimal(rate["output_cny_per_k_tokens"])) / 1000
+            total_usd = None
+            method = "raw tokens × observed SiliconFlow billing rates"
+            check = billing["qwen"]["account_checks"][model]
+            assert tokens_in <= check["billed_input_tokens"] and tokens_out <= check["billed_output_tokens"]
+        else:
+            total_cny = total_usd = None
+            method = "unavailable: no distinct 4B billing item"
         rows.append({
-            "model": model, "latency_observations": len(lats), "latency_p50_ms": percentile(lats, 50),
+            "model": model, "attempted_items": len(raw), "input_tokens": tokens_in, "output_tokens": tokens_out,
+            "latency_observations": len(lats), "latency_p50_ms": percentile(lats, 50),
             "latency_p95_ms": percentile(lats, 95),
-            "estimated_usd_per_1000_items": sum(costs) / 1050 * 1000 if all(x is not None for x in costs) else None,
-            "cost_source": "recorded tokens × unverified historical list-price placeholders" if all(x is not None for x in costs) else "unavailable",
+            "benchmark_cost_cny": float(total_cny) if total_cny is not None else None,
+            "benchmark_cost_usd": float(total_usd) if total_usd is not None else None,
+            "cny_per_1000_items": float(total_cny * 1000 / 1050) if total_cny is not None else None,
+            "cost_method": method,
         })
     (ROOT / "results" / "efficiency.json").write_text(json.dumps({
         "scope": "All five datasets, 1,050 attempted items per model",
         "latency_note": "Client-observed request latency where recorded; excludes missing latency on some network failures. Provider, queue, payload and date are not controlled.",
-        "cost_note": "Illustrative estimate, not an invoice or current public price. Historical price inputs were not independently archived. Qwen3.8-27B is unavailable.",
+        "cost_note": "Jev: matched historical OpenRouter activity charge, converted at the 2026-09-22 USD/CNY midpoint. Qwen: benchmark tokens times observed SiliconFlow billing rates, excluding extra account calls. 4B unavailable. Cost excludes credit-purchase fees, taxes, and unreported overhead; figures are historical and are not current quotes.",
+        "billing_evidence": "results/billing_evidence.json",
         "rows": rows,
     }, indent=2) + "\n")
     return rows
+
+
+def build_score_time_cost(stats: dict, rows: list[dict]) -> str:
+    scores = {"jev": stats["comparisons"][0]["jev_macro_accuracy"] * 100}
+    scores.update({x["candidate"]: x["candidate_macro_accuracy"] * 100 for x in stats["comparisons"]})
+    efficiency = {r["model"]: r for r in rows}
+    cols = [(247, 220, "Score", "Equal-weight accuracy · %", 100),
+            (520, 200, "Time", "Median API request · seconds", 6),
+            (770, 210, "Cost", "CNY / 1,000 items", 3)]
+    out = [svg_text(28, 39, "Score · time · cost", font_size=25, font_weight=700),
+           svg_text(28, 64, "Same 1,050 attempts per model; all rows use the same task mix", font_size=13, class_="muted")]
+    for left, span, title, subtitle, maximum in cols:
+        out.append(svg_text(left, 105, title, font_size=16, font_weight=700))
+        out.append(svg_text(left, 124, subtitle, font_size=11, class_="muted"))
+        out.append(f'<line x1="{left}" y1="145" x2="{left+span}" y2="145" class="grid"/>')
+        out.append(svg_text(left, 140, "0", font_size=10, class_="muted"))
+        out.append(svg_text(left+span, 140, str(maximum), font_size=10, text_anchor="end", class_="muted"))
+    for i, model in enumerate(MODELS):
+        y = 178 + i*54
+        r = efficiency[model]
+        color = "#3062c4" if model == "jev" else "#8a97aa"
+        out.append(svg_text(28, y+6, NAMES[model], font_size=12, font_weight=700 if model == "jev" else 400))
+        for left, span, value, maximum, label in [
+            (247, 220, scores[model], 100, f"{scores[model]:.1f}%"),
+            (520, 200, r["latency_p50_ms"] / 1000, 6, f'{r["latency_p50_ms"]/1000:.2f} s'),
+            (770, 210, r["cny_per_1000_items"], 3, f'¥{r["cny_per_1000_items"]:.2f}' if r["cny_per_1000_items"] is not None else "unknown")]:
+            if value is None:
+                out.append(svg_text(left+span+11, y+5, label, font_size=12, class_="muted"))
+            else:
+                out.append(f'<rect x="{left}" y="{y-9}" width="{span*value/maximum:.2f}" height="20" rx="3" fill="{color}"/>')
+                out.append(svg_text(left+span+11, y+5, label, font_size=12, font_weight=600))
+        out.append(f'<line x1="28" y1="{y+22}" x2="1060" y2="{y+22}" class="grid"/>')
+    out.append(svg_text(28, 580, "Cost: historical OpenRouter charge for Jev; SiliconFlow bill rates × benchmark tokens for Qwen; USD→CNY at 6.7459.", font_size=11, class_="muted"))
+    out.append(svg_text(28, 599, "Time is cross-provider client latency, not intrinsic speed. Qwen3.5 4B has no attributable bill line.", font_size=11, class_="muted"))
+    return wrap_svg(1120, 620, "Score, API time and cost for seven benchmarked models", "Aligned comparison of equal-weight accuracy, median observed API latency and CNY cost per thousand attempts.", out)
 
 
 def build_latency(rows: list[dict]) -> str:
@@ -174,6 +232,7 @@ def main() -> None:
     rows = build_reanalysis()
     efficiency = build_efficiency()
     (FIGURES / "latency.svg").write_text(build_latency(efficiency), encoding="utf-8")
+    (FIGURES / "score-time-cost.svg").write_text(build_score_time_cost(stats, efficiency), encoding="utf-8")
     assert len(rows) == 1050
     for comp in stats["comparisons"]:
         model = comp["candidate"]

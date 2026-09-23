@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 620" role="img" aria-labelledby="title desc">
+<title id="title">Score, API time and cost for seven benchmarked models</title>
+<desc id="desc">Aligned comparison of equal-weight accuracy, median observed API latency and CNY cost per thousand attempts.</desc>
+<style>text{font-family:Inter,Arial,sans-serif;fill:#1e293b} .muted{fill:#64748b}.grid{stroke:#dbe2ea;stroke-width:1}.blue{fill:#3062c4}.orange{fill:#b76027}.thin{stroke:#1e293b;stroke-width:2}</style>
+<text x="28" y="39" font-size="25" font-weight="700">Score · time · cost</text>
+<text x="28" y="64" font-size="13" class="muted">Same 1,050 attempts per model; all rows use the same task mix</text>
+<text x="247" y="105" font-size="16" font-weight="700">Score</text>
+<text x="247" y="124" font-size="11" class="muted">Equal-weight accuracy · %</text>
+<line x1="247" y1="145" x2="467" y2="145" class="grid"/>
+<text x="247" y="140" font-size="10" class="muted">0</text>
+<text x="467" y="140" font-size="10" text-anchor="end" class="muted">100</text>
+<text x="520" y="105" font-size="16" font-weight="700">Time</text>
+<text x="520" y="124" font-size="11" class="muted">Median API request · seconds</text>
+<line x1="520" y1="145" x2="720" y2="145" class="grid"/>
+<text x="520" y="140" font-size="10" class="muted">0</text>
+<text x="720" y="140" font-size="10" text-anchor="end" class="muted">6</text>
+<text x="770" y="105" font-size="16" font-weight="700">Cost</text>
+<text x="770" y="124" font-size="11" class="muted">CNY / 1,000 items</text>
+<line x1="770" y1="145" x2="980" y2="145" class="grid"/>
+<text x="770" y="140" font-size="10" class="muted">0</text>
+<text x="980" y="140" font-size="10" text-anchor="end" class="muted">3</text>
+<text x="28" y="184" font-size="12" font-weight="700">Jev 1.13</text>
+<rect x="247" y="169" width="174.61" height="20" rx="3" fill="#3062c4"/>
+<text x="478" y="183" font-size="12" font-weight="600">79.4%</text>
+<rect x="520" y="169" width="55.50" height="20" rx="3" fill="#3062c4"/>
+<text x="731" y="183" font-size="12" font-weight="600">1.67 s</text>
+<rect x="770" y="169" width="22.85" height="20" rx="3" fill="#3062c4"/>
+<text x="991" y="183" font-size="12" font-weight="600">¥0.33</text>
+<line x1="28" y1="200" x2="1060" y2="200" class="grid"/>
+<text x="28" y="238" font-size="12" font-weight="400">Qwen3.5 4B</text>
+<rect x="247" y="223" width="152.09" height="20" rx="3" fill="#8a97aa"/>
+<text x="478" y="237" font-size="12" font-weight="600">69.1%</text>
+<rect x="520" y="223" width="96.29" height="20" rx="3" fill="#8a97aa"/>
+<text x="731" y="237" font-size="12" font-weight="600">2.89 s</text>
+<text x="991" y="237" font-size="12" class="muted">unknown</text>
+<line x1="28" y1="254" x2="1060" y2="254" class="grid"/>
+<text x="28" y="292" font-size="12" font-weight="400">Qwen3.5 9B</text>
+<rect x="247" y="277" width="160.23" height="20" rx="3" fill="#8a97aa"/>
+<text x="478" y="291" font-size="12" font-weight="600">72.8%</text>
+<rect x="520" y="277" width="70.98" height="20" rx="3" fill="#8a97aa"/>
+<text x="731" y="291" font-size="12" font-weight="600">2.13 s</text>
+<rect x="770" y="277" width="38.05" height="20" rx="3" fill="#8a97aa"/>
+<text x="991" y="291" font-size="12" font-weight="600">¥0.54</text>
+<line x1="28" y1="308" x2="1060" y2="308" class="grid"/>
+<text x="28" y="346" font-size="12" font-weight="400">Qwen3.5 27B</text>
+<rect x="247" y="331" width="175.27" height="20" rx="3" fill="#8a97aa"/>
+<text x="478" y="345" font-size="12" font-weight="600">79.7%</text>
+<rect x="520" y="331" width="92.36" height="20" rx="3" fill="#8a97aa"/>
+<text x="731" y="345" font-size="12" font-weight="600">2.77 s</text>
+<rect x="770" y="331" width="48.28" height="20" rx="3" fill="#8a97aa"/>
+<text x="991" y="345" font-size="12" font-weight="600">¥0.69</text>
+<line x1="28" y1="362" x2="1060" y2="362" class="grid"/>
+<text x="28" y="400" font-size="12" font-weight="400">Qwen3.5 35B-A3B</text>
+<rect x="247" y="385" width="166.10" height="20" rx="3" fill="#8a97aa"/>
+<text x="478" y="399" font-size="12" font-weight="600">75.5%</text>
+<rect x="520" y="385" width="81.31" height="20" rx="3" fill="#8a97aa"/>
+<text x="731" y="399" font-size="12" font-weight="600">2.44 s</text>
+<rect x="770" y="385" width="31.02" height="20" rx="3" fill="#8a97aa"/>
+<text x="991" y="399" font-size="12" font-weight="600">¥0.44</text>
+<line x1="28" y1="416" x2="1060" y2="416" class="grid"/>
+<text x="28" y="454" font-size="12" font-weight="400">Qwen3.5 122B-A10B</text>
+<rect x="247" y="439" width="170.21" height="20" rx="3" fill="#8a97aa"/>
+<text x="478" y="453" font-size="12" font-weight="600">77.4%</text>
+<rect x="520" y="439" width="179.84" height="20" rx="3" fill="#8a97aa"/>
+<text x="731" y="453" font-size="12" font-weight="600">5.40 s</text>
+<rect x="770" y="439" width="63.42" height="20" rx="3" fill="#8a97aa"/>
+<text x="991" y="453" font-size="12" font-weight="600">¥0.91</text>
+<line x1="28" y1="470" x2="1060" y2="470" class="grid"/>
+<text x="28" y="508" font-size="12" font-weight="400">Qwen3.8 27B</text>
+<rect x="247" y="493" width="172.33" height="20" rx="3" fill="#8a97aa"/>
+<text x="478" y="507" font-size="12" font-weight="600">78.3%</text>
+<rect x="520" y="493" width="145.47" height="20" rx="3" fill="#8a97aa"/>
+<text x="731" y="507" font-size="12" font-weight="600">4.36 s</text>
+<rect x="770" y="493" width="201.42" height="20" rx="3" fill="#8a97aa"/>
+<text x="991" y="507" font-size="12" font-weight="600">¥2.88</text>
+<line x1="28" y1="524" x2="1060" y2="524" class="grid"/>
+<text x="28" y="580" font-size="11" class="muted">Cost: historical OpenRouter charge for Jev; SiliconFlow bill rates × benchmark tokens for Qwen; USD→CNY at 6.7459.</text>
+<text x="28" y="599" font-size="11" class="muted">Time is cross-provider client latency, not intrinsic speed. Qwen3.5 4B has no attributable bill line.</text>
+</svg>

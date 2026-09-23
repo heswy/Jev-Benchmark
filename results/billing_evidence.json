@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "source": {
+    "siliconflow_csv_sha256": "331f2758bbcfbcb5a9394859e27fc5e79081d8eecadeb43639fd48096ee788fb",
+    "siliconflow_rows": 376,
+    "openrouter_csv_sha256": "c5bc6d88f70a5ad8586eb04861d90b9c27fefb22bf46fac8db0180fb34aac8cc",
+    "openrouter_rows": 1718,
+    "note": "Private exports are not redistributed. Hashes identify the exact source files for independent verification by their owner."
+  },
+  "fx": {
+    "usd_cny": "6.7459",
+    "date": "2026-09-22",
+    "source": "https://www.safe.gov.cn/AppStructured/hlw/RMBQuery.do",
+    "method": "PBOC/CFETS midpoint, 100 USD = CNY 674.59; analytical conversion, not a payment settlement rate"
+  },
+  "jev": {
+    "provider": "OpenRouter",
+    "currency": "USD",
+    "model_permaslug": "typesafe/jev-1.13-20260917",
+    "matched_calls": 1050,
+    "jev_activity_calls": 1198,
+    "unmatched_activity_calls": 148,
+    "matched_cost_usd": "0.050819",
+    "matching_method": "multiset of (prompt tokens, completion tokens); all 1050 raw rows covered; same cost for duplicate token pairs",
+    "rounding_note": "CSV request costs have six decimal places; their sum inherits per-row rounding."
+  },
+  "qwen": {
+    "provider": "SiliconFlow",
+    "currency": "CNY",
+    "unit": "K tokens",
+    "method": "benchmark raw token totals times export-observed input/output unit prices; account totals include extra calls",
+    "rates": {
+      "qwen3.5-9b": {
+        "input_cny_per_k_tokens": "0.000500",
+        "output_cny_per_k_tokens": "0.004000"
+      },
+      "qwen3.5-27b": {
+        "input_cny_per_k_tokens": "0.000600",
+        "output_cny_per_k_tokens": "0.004800"
+      },
+      "qwen3.5-35b": {
+        "input_cny_per_k_tokens": "0.000400",
+        "output_cny_per_k_tokens": "0.003200"
+      },
+      "qwen3.5-122b": {
+        "input_cny_per_k_tokens": "0.000800",
+        "output_cny_per_k_tokens": "0.006400"
+      },
+      "qwen3.8-27b": {
+        "input_cny_per_k_tokens": "0.003000",
+        "output_cny_per_k_tokens": "0.012000"
+      }
+    },
+    "account_checks": {
+      "qwen3.5-9b": {
+        "billed_input_tokens": 1378433,
+        "billed_output_tokens": 83697,
+        "account_bill_cny": "1.024010",
+        "billing_rows": 40
+      },
+      "qwen3.5-27b": {
+        "billed_input_tokens": 795321,
+        "billed_output_tokens": 58705,
+        "account_bill_cny": "0.758978",
+        "billing_rows": 68
+      },
+      "qwen3.5-35b": {
+        "billed_input_tokens": 743458,
+        "billed_output_tokens": 52493,
+        "account_bill_cny": "0.465361",
+        "billing_rows": 32
+      },
+      "qwen3.5-122b": {
+        "billed_input_tokens": 743586,
+        "billed_output_tokens": 57019,
+        "account_bill_cny": "0.959789",
+        "billing_rows": 74
+      },
+      "qwen3.8-27b": {
+        "billed_input_tokens": 751658,
+        "billed_output_tokens": 64690,
+        "account_bill_cny": "3.031254",
+        "billing_rows": 42
+      }
+    },
+    "unavailable": {
+      "qwen3.5-4b": "No separately identifiable 4B billing item in this export"
+    }
+  }
+}

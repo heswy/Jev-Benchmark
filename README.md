@@ -36,11 +36,11 @@ On these particular decision tasks, Jev's observed score is close to Qwen3.5 27B
 
 The [full report](report/RESULTS.md) gives a separate Choice / Score / Noul leaderboard, per-dataset paired outcomes, validity counts and the limitations of mixing task types.
 
-## Speed and cost are secondary
+## Score, time and cost
 
-![Observed median API request latency](report/figures/latency.svg)
+![Aligned comparison of accuracy, observed API latency and historical cost](report/figures/score-time-cost.svg)
 
-Jev had the lowest **observed API request median** in this set (1.67 s), compared with 2.77 s for Qwen3.5 27B and 4.36 s for Qwen3.8 27B. These are client-side, cross-provider observations, not controlled intrinsic model benchmarks. Recorded token counts multiplied by historical price placeholders give an illustrative $0.0489 per 1,000 attempted Jev items versus $0.0877 for Qwen3.5 27B; **4B and 9B are cheaper by the same estimate**, and the Qwen3.8 USD price is missing. The estimates are not invoices or current prices. See the [methods and exact denominators](report/RESULTS.md#延迟与成本描述性维度).
+Jev scored 79.37%, with a 1.67 s observed API median and ¥0.33 per 1,000 attempted items at the historical billing and exchange rates. Qwen3.5 27B scored 79.67%, took 2.77 s, and cost an estimated ¥0.69 per 1,000; Qwen3.8 27B scored 78.33%, took 4.36 s, and cost an estimated ¥2.88 per 1,000. Jev cost is matched to 1,050 OpenRouter activity charges; Qwen costs use saved token counts and the unit rates in the actual SiliconFlow bill. The 4B bill line cannot be identified, so its cost is unknown. Cross-provider latency and costs are descriptive, not controlled model properties or current quotes. See the [source and reconciliation detail](report/RESULTS.md#延迟与成本描述性维度).
 
 ## Reproduce the published analysis
 
@@ -51,7 +51,7 @@ python3 -m unittest discover -s tests -v
 python3 -m scripts.verify_release
 ```
 
-The verifier recomputes all published primary scores, dataset results, paired 95% bootstrap intervals, McNemar tests and paired permutation p-values from 1,050 paired rows. To rebuild the figures after reconstructing the upstream datasets:
+The verifier recomputes all published primary scores, dataset results, paired 95% bootstrap intervals, McNemar tests and paired permutation p-values from 1,050 paired rows. It also checks published token, latency and cost aggregates against the archived raw predictions and sanitized billing evidence. To rebuild the figures after reconstructing the upstream datasets:
 
 ```bash
 python3 -m scripts.build_publication
@@ -64,7 +64,8 @@ See [REPRODUCING.md](REPRODUCING.md) for frozen hashes, dataset acquisition, API
 - `results/raw-complete.tar.gz`: all 35 per-item response files for the seven complete models, with validity flags, observed latency and token counts. Its checksum is in `results/ARCHIVES.sha256`.
 - `results/reanalysis.csv`: one text-free row per gold item, with paired correctness bits for every complete model.
 - `results/statistics_with_upper.json`: exact input hashes, protocol, all paired estimates and significance tests.
-- `results/efficiency.json`: aggregate API latency and explicitly qualified cost estimates.
+- `results/efficiency.json`: aggregate API latency and benchmark-attributable cost estimates.
+- `results/billing_evidence.json`: sanitized provider bill rates, Jev activity match, export hashes and exchange-rate provenance. Private account exports are not published.
 - `results/manifests/` and `results/history.tar.gz`: the complete Qwen3.8 27B run's original manifest and snapshot, plus historical summaries. Earlier runs have weaker provenance, documented in the [experiment log](EXPERIMENT_LOG.md).
 
 An attempted Qwen3.5 397B run stopped after provider HTTP 402 credit failures. It is excluded from every completed-model ranking and from the public prediction archives; the local interrupted files are preserved. DeepSeek V4 was not run as a full benchmark. The experiment log records these decisions without treating provider payment failure as a model error.

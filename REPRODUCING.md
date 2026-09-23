@@ -43,7 +43,22 @@ Regenerate the figures and descriptive efficiency file after reconstructing the 
 python3 -m scripts.build_publication
 ```
 
-This produces `report/figures/*.svg`, `results/reanalysis.csv`, and `results/efficiency.json` from the local frozen samples and model outputs. The source figures in the repository were built from the verified 2026-09-22/23 snapshot.
+This produces `report/figures/*.svg`, `results/reanalysis.csv`, and `results/efficiency.json` from the local frozen samples, model outputs, and committed sanitized `results/billing_evidence.json`. The source figures in the repository were built from the verified 2026-09-22/23 snapshot.
+
+### Historical billing evidence
+
+The private provider exports are **not** distributed. Their SHA-256 digests, observed Qwen input/output rates, Jev matched charge and FX assumption are in `results/billing_evidence.json`. Its inputs were a [SiliconFlow bill](https://siliconflow.cn/pricing) (CNY, K tokens) and an [OpenRouter activity export](https://openrouter.ai/support/) (USD) for the same benchmark period. To regenerate the sanitized evidence when you have those private CSVs, run:
+
+```bash
+python3 -m scripts.reconcile_billing \
+  --siliconflow-csv /path/to/siliconflow_bill.csv \
+  --openrouter-csv /path/to/openrouter_activity.csv
+python3 -m scripts.build_publication
+```
+
+The reconciliation script filters OpenRouter to `typesafe/jev-1.13-20260917` and matches all 1,050 Jev raw results to activity by the multiset of input and output token counts. Its 148 other Jev calls are excluded. It uses only identifiable Qwen model line items from SiliconFlow; other models and any `free-text-model` lines are excluded. The Qwen3.5 35B token totals match its account bill exactly; other Qwen account totals include extra use. Qwen3.5 4B has no identifiable bill line and remains unknown. The export has no common request identifier with the benchmark files, so the Jev match is by token pair; repeated pairs all have the same exported cost. Published per-call OpenRouter costs have six decimal places, so the summed cost reflects their rounding.
+
+The CNY comparison uses the 2026-09-22 [PBOC/CFETS USD/CNY midpoint](https://www.safe.gov.cn/AppStructured/hlw/RMBQuery.do) of 6.7459, solely as an analytical conversion. It is not the actual settlement rate. `results/efficiency.json` is then recalculated from public raw token counts and the sanitized evidence. Purchase fees, taxes and other unreported charges are outside this calculation. Historical prices and cross-provider service conditions are not controlled; they must not be read as current quotes or intrinsic model properties.
 
 ## Run a model again
 
