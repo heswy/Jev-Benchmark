@@ -40,7 +40,7 @@ The [full report](report/RESULTS.md) gives a separate Choice / Score / Noul lead
 
 ![Aligned comparison of accuracy, observed API latency and historical cost](report/figures/score-time-cost.svg)
 
-Jev scored 79.37%, with a 1.67 s observed API median and ¥0.33 per 1,000 attempted items at the historical billing and exchange rates. Qwen3.5 27B scored 79.67%, took 2.77 s, and cost an estimated ¥0.69 per 1,000; Qwen3.8 27B scored 78.33%, took 4.36 s, and cost an estimated ¥2.88 per 1,000. Jev cost is matched to 1,050 OpenRouter activity charges; Qwen costs use saved token counts and the unit rates in the actual SiliconFlow bill. The 4B bill line cannot be identified, so its cost is unknown. Cross-provider latency and costs are descriptive, not controlled model properties or current quotes. See the [source and reconciliation detail](report/RESULTS.md#延迟与成本描述性维度).
+Jev scored 79.37%, with a 1.67 s observed API median and ¥0.33 per 1,000 attempted items at the historical billing and exchange rates. Qwen3.5 27B scored 79.67%, took 2.77 s, and cost an estimated ¥0.69 per 1,000; Qwen3.8 27B scored 78.33%, took 4.36 s, and cost an estimated ¥2.88 per 1,000. Jev cost is matched to 1,050 OpenRouter activity charges; paid Qwen costs use saved token counts and observed SiliconFlow bill rates. **Qwen3.5 4B is ¥0 under [SiliconFlow's announced free tariff](https://www.siliconflow.cn/news/yg6n19y2g6frnp4koxu8ye48)**; its bill export has no separately named 4B line, so this is a published tariff assumption rather than a per-request invoice match. Cross-provider latency and costs are descriptive, not controlled model properties or current quotes. See the [source and reconciliation detail](report/RESULTS.md#延迟与成本描述性维度).
 
 ## Reproduce the published analysis
 

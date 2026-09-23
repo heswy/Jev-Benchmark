@@ -1,7 +1,7 @@
 {
   "scope": "All five datasets, 1,050 attempted items per model",
   "latency_note": "Client-observed request latency where recorded; excludes missing latency on some network failures. Provider, queue, payload and date are not controlled.",
-  "cost_note": "Jev: matched historical OpenRouter activity charge, converted at the 2026-09-22 USD/CNY midpoint. Qwen: benchmark tokens times observed SiliconFlow billing rates, excluding extra account calls. 4B unavailable. Cost excludes credit-purchase fees, taxes, and unreported overhead; figures are historical and are not current quotes.",
+  "cost_note": "Jev: matched historical OpenRouter activity charge, converted at the 2026-09-22 USD/CNY midpoint. Paid Qwen: benchmark tokens times observed SiliconFlow billing rates, excluding extra account calls. 4B: zero under SiliconFlow's officially announced free tariff, not individually matched to a named bill line. Cost excludes credit-purchase fees, taxes, and unreported overhead; figures are historical and are not current quotes.",
   "billing_evidence": "results/billing_evidence.json",
   "rows": [
     {
@@ -25,10 +25,10 @@
       "latency_observations": 1050,
       "latency_p50_ms": 2888.7360420012556,
       "latency_p95_ms": 48347.0184212023,
-      "benchmark_cost_cny": null,
+      "benchmark_cost_cny": 0.0,
       "benchmark_cost_usd": null,
-      "cny_per_1000_items": null,
-      "cost_method": "unavailable: no distinct 4B billing item"
+      "cny_per_1000_items": 0.0,
+      "cost_method": "SiliconFlow official free tariff; no individually identifiable 4B bill line"
     },
     {
       "model": "qwen3.5-9b",

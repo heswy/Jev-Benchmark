@@ -110,6 +110,11 @@ def verify() -> None:
                 cost = Decimal(billing["jev"]["matched_cost_usd"]) * Decimal(billing["fx"]["usd_cny"])
                 eq(input_tokens, 1222683, "jev.matched_input_tokens")
                 eq(output_tokens, 523259, "jev.matched_output_tokens")
+            elif model == billing["qwen"]["free_model"]["model"]:
+                free = billing["qwen"]["free_model"]
+                if Decimal(free["input_cny_per_k_tokens"]) != 0 or Decimal(free["output_cny_per_k_tokens"]) != 0:
+                    raise AssertionError("4B published free tariff must be zero")
+                cost = Decimal(0)
             elif model in billing["qwen"]["rates"]:
                 rate = billing["qwen"]["rates"][model]
                 cost = (Decimal(input_tokens) * Decimal(rate["input_cny_per_k_tokens"]) +

@@ -140,6 +140,12 @@ def build_efficiency() -> list[dict]:
             total_usd = Decimal(billing["jev"]["matched_cost_usd"])
             total_cny = total_usd * Decimal(billing["fx"]["usd_cny"])
             method = "matched OpenRouter activity costs, then 2026-09-22 USD/CNY midpoint"
+        elif model == billing["qwen"]["free_model"]["model"]:
+            free = billing["qwen"]["free_model"]
+            assert Decimal(free["input_cny_per_k_tokens"]) == Decimal(free["output_cny_per_k_tokens"]) == 0
+            total_cny = Decimal(0)
+            total_usd = None
+            method = "SiliconFlow official free tariff; no individually identifiable 4B bill line"
         elif model in billing["qwen"]["rates"]:
             rate = billing["qwen"]["rates"][model]
             total_cny = (Decimal(tokens_in) * Decimal(rate["input_cny_per_k_tokens"]) +
@@ -149,8 +155,7 @@ def build_efficiency() -> list[dict]:
             check = billing["qwen"]["account_checks"][model]
             assert tokens_in <= check["billed_input_tokens"] and tokens_out <= check["billed_output_tokens"]
         else:
-            total_cny = total_usd = None
-            method = "unavailable: no distinct 4B billing item"
+            raise AssertionError(f"Missing billing basis for {model}")
         rows.append({
             "model": model, "attempted_items": len(raw), "input_tokens": tokens_in, "output_tokens": tokens_out,
             "latency_observations": len(lats), "latency_p50_ms": percentile(lats, 50),
@@ -163,7 +168,7 @@ def build_efficiency() -> list[dict]:
     (ROOT / "results" / "efficiency.json").write_text(json.dumps({
         "scope": "All five datasets, 1,050 attempted items per model",
         "latency_note": "Client-observed request latency where recorded; excludes missing latency on some network failures. Provider, queue, payload and date are not controlled.",
-        "cost_note": "Jev: matched historical OpenRouter activity charge, converted at the 2026-09-22 USD/CNY midpoint. Qwen: benchmark tokens times observed SiliconFlow billing rates, excluding extra account calls. 4B unavailable. Cost excludes credit-purchase fees, taxes, and unreported overhead; figures are historical and are not current quotes.",
+        "cost_note": "Jev: matched historical OpenRouter activity charge, converted at the 2026-09-22 USD/CNY midpoint. Paid Qwen: benchmark tokens times observed SiliconFlow billing rates, excluding extra account calls. 4B: zero under SiliconFlow's officially announced free tariff, not individually matched to a named bill line. Cost excludes credit-purchase fees, taxes, and unreported overhead; figures are historical and are not current quotes.",
         "billing_evidence": "results/billing_evidence.json",
         "rows": rows,
     }, indent=2) + "\n")
@@ -193,15 +198,15 @@ def build_score_time_cost(stats: dict, rows: list[dict]) -> str:
         for left, span, value, maximum, label in [
             (247, 220, scores[model], 100, f"{scores[model]:.1f}%"),
             (520, 200, r["latency_p50_ms"] / 1000, 6, f'{r["latency_p50_ms"]/1000:.2f} s'),
-            (770, 210, r["cny_per_1000_items"], 3, f'¥{r["cny_per_1000_items"]:.2f}' if r["cny_per_1000_items"] is not None else "unknown")]:
-            if value is None:
-                out.append(svg_text(left+span+11, y+5, label, font_size=12, class_="muted"))
+            (770, 210, r["cny_per_1000_items"], 3, "¥0 · free*" if model == "qwen3.5-4b" else f'¥{r["cny_per_1000_items"]:.2f}')]:
+            if value == 0:
+                out.append(f'<circle cx="{left+2}" cy="{y+1}" r="4" fill="#8a97aa"/>')
             else:
                 out.append(f'<rect x="{left}" y="{y-9}" width="{span*value/maximum:.2f}" height="20" rx="3" fill="{color}"/>')
-                out.append(svg_text(left+span+11, y+5, label, font_size=12, font_weight=600))
+            out.append(svg_text(left+span+11, y+5, label, font_size=12, font_weight=600))
         out.append(f'<line x1="28" y1="{y+22}" x2="1060" y2="{y+22}" class="grid"/>')
     out.append(svg_text(28, 580, "Cost: historical OpenRouter charge for Jev; SiliconFlow bill rates × benchmark tokens for Qwen; USD→CNY at 6.7459.", font_size=11, class_="muted"))
-    out.append(svg_text(28, 599, "Time is cross-provider client latency, not intrinsic speed. Qwen3.5 4B has no attributable bill line.", font_size=11, class_="muted"))
+    out.append(svg_text(28, 599, "*4B uses SiliconFlow's announced free tariff; no separately named 4B bill line. Time is cross-provider client latency.", font_size=11, class_="muted"))
     return wrap_svg(1120, 620, "Score, API time and cost for seven benchmarked models", "Aligned comparison of equal-weight accuracy, median observed API latency and CNY cost per thousand attempts.", out)
 
 

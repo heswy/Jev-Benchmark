@@ -102,7 +102,12 @@ def reconcile(siliconflow: Path, openrouter: Path, usd_cny: Decimal) -> dict:
         "qwen": {"provider": "SiliconFlow", "currency": "CNY", "unit": "K tokens",
                  "method": "benchmark raw token totals times export-observed input/output unit prices; account totals include extra calls",
                  "rates": rates, "account_checks": checks,
-                 "unavailable": {"qwen3.5-4b": "No separately identifiable 4B billing item in this export"}}
+                 "free_model": {
+                     "model": "qwen3.5-4b", "input_cny_per_k_tokens": "0", "output_cny_per_k_tokens": "0",
+                     "source": "https://www.siliconflow.cn/news/yg6n19y2g6frnp4koxu8ye48",
+                     "source_date": "2026-03-09",
+                     "basis": "SiliconFlow's official Qwen3.5 launch announcement says 4B is free; the private export has no 4B-named line, so zero is a published tariff assumption rather than an individually matched invoice charge"
+                 }}
     }
 
 
