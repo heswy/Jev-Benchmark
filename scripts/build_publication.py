@@ -116,7 +116,7 @@ def build_reanalysis() -> list[dict[str, str]]:
             row.update({model: str(correctness(item, preds[model][item["id"]])) for model in MODELS})
             rows.append(row)
     with target.open("w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=["dataset", "id", *MODELS])
+        writer = csv.DictWriter(f, fieldnames=["dataset", "id", *MODELS], lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
     return rows
