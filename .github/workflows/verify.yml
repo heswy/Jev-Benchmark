@@ -1,0 +1,26 @@
+name: Verify published analysis
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run protocol tests
+        run: python -m unittest discover -s tests -v
+      - name: Recompute paired statistics from public per-item data
+        run: python -m scripts.verify_release
+      - name: Parse published SVG figures
+        run: |
+          python - <<'PY'
+          import pathlib
+          import xml.etree.ElementTree as ET
+          for path in pathlib.Path('report/figures').glob('*.svg'):
+              ET.parse(path)
+          PY

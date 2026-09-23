@@ -1,0 +1,6 @@
+# JEV-Benchmark Python deps
+# Core suite is stdlib-only at runtime (except BoolQ fetch which needs pyarrow).
+# pyarrow is only required for fetch.py boolq parquet:
+#   python -m pip install --target /tmp/jev_pydeps --index-url https://pypi.tuna.tsinghua.edu.cn/simple pyarrow
+#
+# No mandatory third-party packages for evaluation.

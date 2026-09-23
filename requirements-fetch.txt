@@ -1,0 +1,2 @@
+# Optional: only needed to regenerate BoolQ from its source parquet file.
+pyarrow>=18

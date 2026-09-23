@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this benchmark, please cite this repository and the original dataset papers."
+title: "Jev-Benchmark: Reproducible Evaluation of Structured Decisions"
+type: software
+authors:
+  - name: "Jev-Benchmark contributors"
+version: "1.0.0"
+date-released: "2026-09-23"
+repository-code: "https://github.com/heswy/Jev-Benchmark"
+license: MIT

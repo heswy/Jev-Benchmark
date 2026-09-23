@@ -1,0 +1,8 @@
+.env
+.env.*
+!.env.example
+.DS_Store
+__pycache__/
+*.pyc
+datasets/*.jsonl
+datasets/*.meta.json

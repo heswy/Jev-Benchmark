@@ -1,0 +1,63 @@
+{
+  "scope": "All five datasets, 1,050 attempted items per model",
+  "latency_note": "Client-observed request latency where recorded; excludes missing latency on some network failures. Provider, queue, payload and date are not controlled.",
+  "cost_note": "Illustrative estimate, not an invoice or current public price. Historical price inputs were not independently archived. Qwen3.8-27B is unavailable.",
+  "rows": [
+    {
+      "model": "jev",
+      "latency_observations": 1050,
+      "latency_p50_ms": 1665.0257080000301,
+      "latency_p95_ms": 3715.5753643988646,
+      "estimated_usd_per_1000_items": 0.048907320000000004,
+      "cost_source": "recorded tokens \u00d7 unverified historical list-price placeholders"
+    },
+    {
+      "model": "qwen3.5-4b",
+      "latency_observations": 1050,
+      "latency_p50_ms": 2888.7360420012556,
+      "latency_p95_ms": 48347.0184212023,
+      "estimated_usd_per_1000_items": 0.01886605714285714,
+      "cost_source": "recorded tokens \u00d7 unverified historical list-price placeholders"
+    },
+    {
+      "model": "qwen3.5-9b",
+      "latency_observations": 1050,
+      "latency_p50_ms": 2129.357333502412,
+      "latency_p95_ms": 4404.626641849972,
+      "estimated_usd_per_1000_items": 0.03602087619047619,
+      "cost_source": "recorded tokens \u00d7 unverified historical list-price placeholders"
+    },
+    {
+      "model": "qwen3.5-27b",
+      "latency_observations": 1049,
+      "latency_p50_ms": 2770.828959000937,
+      "latency_p95_ms": 17572.477566801535,
+      "estimated_usd_per_1000_items": 0.08771228571428571,
+      "cost_source": "recorded tokens \u00d7 unverified historical list-price placeholders"
+    },
+    {
+      "model": "qwen3.5-35b",
+      "latency_observations": 1045,
+      "latency_p50_ms": 2439.2509579993202,
+      "latency_p95_ms": 36368.011483199305,
+      "estimated_usd_per_1000_items": 0.12870528571428572,
+      "cost_source": "recorded tokens \u00d7 unverified historical list-price placeholders"
+    },
+    {
+      "model": "qwen3.5-122b",
+      "latency_observations": 1039,
+      "latency_p50_ms": 5395.109332999937,
+      "latency_p95_ms": 57876.4510954999,
+      "estimated_usd_per_1000_items": 0.283227,
+      "cost_source": "recorded tokens \u00d7 unverified historical list-price placeholders"
+    },
+    {
+      "model": "qwen3.8-27b",
+      "latency_observations": 1050,
+      "latency_p50_ms": 4364.128249999794,
+      "latency_p95_ms": 18835.748016849764,
+      "estimated_usd_per_1000_items": null,
+      "cost_source": "unavailable"
+    }
+  ]
+}

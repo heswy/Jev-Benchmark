@@ -65,9 +65,9 @@ See [REPRODUCING.md](REPRODUCING.md) for frozen hashes, dataset acquisition, API
 - `results/reanalysis.csv`: one text-free row per gold item, with paired correctness bits for every complete model.
 - `results/statistics_with_upper.json`: exact input hashes, protocol, all paired estimates and significance tests.
 - `results/efficiency.json`: aggregate API latency and explicitly qualified cost estimates.
-- `results/manifests/` and `results/history.tar.gz`: the complete Qwen3.8 27B run's original manifest and snapshot, plus historical summaries and the interrupted 397B audit. Earlier runs have weaker provenance, documented in the [experiment log](EXPERIMENT_LOG.md).
+- `results/manifests/` and `results/history.tar.gz`: the complete Qwen3.8 27B run's original manifest and snapshot, plus historical summaries. Earlier runs have weaker provenance, documented in the [experiment log](EXPERIMENT_LOG.md).
 
-An attempted Qwen3.5 397B run stopped after provider HTTP 402 credit failures. It is excluded from every completed-model ranking. DeepSeek V4 was not run as a full benchmark. The archive records these decisions without treating provider payment failure as a model error.
+An attempted Qwen3.5 397B run stopped after provider HTTP 402 credit failures. It is excluded from every completed-model ranking and from the public prediction archives; the local interrupted files are preserved. DeepSeek V4 was not run as a full benchmark. The experiment log records these decisions without treating provider payment failure as a model error.
 
 ## Scope and limitations
 

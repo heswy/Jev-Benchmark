@@ -1,0 +1,987 @@
+{
+  "generated_at_utc": "2026-09-23T01:24:37.679739+00:00",
+  "protocol": {
+    "primary": "macro_mean_end_to_end_accuracy",
+    "reference": "jev",
+    "dataset_order": [
+      "banking77",
+      "clinc150",
+      "sst5",
+      "boolq",
+      "agnews"
+    ],
+    "failed_prediction": "incorrect",
+    "choice_oos_tau": 0.35,
+    "score_accuracy": "argmax of level probabilities",
+    "noul_threshold": 0.5,
+    "bootstrap_draws": 5000,
+    "permutation_draws": 5000,
+    "seed": 42,
+    "analysis_source_sha256": "a36e84a92ef44e03042e60af5d282bb7573231368310655669ee640b23bc5e7f",
+    "config_source_sha256": "00fa9f7ab7170fd2fefd811112b2dac1c4b0e553db9f5063ae3b81c399e6ac24",
+    "upper_bound_candidates_planned": [
+      "qwen3.8-27b"
+    ],
+    "upper_bound_decision": "For the completed Qwen3.8-27B comparison, candidate macro difference > 0 and one-sided paired permutation p < 0.05. Other planned runs were cancelled before complete results."
+  },
+  "sources": {
+    "banking77": {
+      "gold_path": "datasets/banking77.jsonl",
+      "gold_sha256": "0862f30acbb35c6b4429a8cf76f2a86884df39959a751090308982fe0140ed80",
+      "n": 300,
+      "raw": {
+        "jev": {
+          "path": "results/raw/banking77__jev.jsonl",
+          "sha256": "7ea00094fcdf83e6cdd816b21dd4f270a63a667383e874792e31e5ea903dfffc",
+          "n": 300,
+          "n_valid": 300,
+          "invalid_reasons": {}
+        },
+        "qwen3.5-4b": {
+          "path": "results/raw/banking77__qwen3.5-4b.jsonl",
+          "sha256": "137508ae2f30a5ee3621e241d0aa43715fee5a06529c0f1d33b7bbafada866b2",
+          "n": 300,
+          "n_valid": 290,
+          "invalid_reasons": {
+            "answer not in label set": 6,
+            "format": 4
+          }
+        },
+        "qwen3.5-9b": {
+          "path": "results/raw/banking77__qwen3.5-9b.jsonl",
+          "sha256": "d8c1cfff6a4af3c7b90d3c98aa97c5f6b04cceb2e3ec77bd4842ac50338fa618",
+          "n": 300,
+          "n_valid": 295,
+          "invalid_reasons": {
+            "answer not in label set": 5
+          }
+        },
+        "qwen3.5-27b": {
+          "path": "results/raw/banking77__qwen3.5-27b.jsonl",
+          "sha256": "d54fcb76e574c908f7cecd80b25fd9f45c8910af13e7615d184948e69e64ddcd",
+          "n": 300,
+          "n_valid": 300,
+          "invalid_reasons": {}
+        },
+        "qwen3.5-35b": {
+          "path": "results/raw/banking77__qwen3.5-35b.jsonl",
+          "sha256": "96fc5feaadfbcfe9bcf7d009d2027d387301b257372096f6b4be188fa4f4c872",
+          "n": 300,
+          "n_valid": 295,
+          "invalid_reasons": {
+            "answer not in label set": 4,
+            "network": 1
+          }
+        },
+        "qwen3.5-122b": {
+          "path": "results/raw/banking77__qwen3.5-122b.jsonl",
+          "sha256": "e3c265813791a9c524a57c5d2af1548e325e27deb70548215780953dd8ef999c",
+          "n": 300,
+          "n_valid": 288,
+          "invalid_reasons": {
+            "network": 4,
+            "answer not in label set": 6,
+            "format": 2
+          }
+        },
+        "qwen3.8-27b": {
+          "path": "results/raw/banking77__qwen3.8-27b.jsonl",
+          "sha256": "3c83fd15a2487e3ba267523951163f7d2c78a1a882806d3f8a1cfe47d37c2485",
+          "n": 300,
+          "n_valid": 297,
+          "invalid_reasons": {
+            "format": 3
+          }
+        }
+      }
+    },
+    "clinc150": {
+      "gold_path": "datasets/clinc150.jsonl",
+      "gold_sha256": "aaac80ce9be550f522d4163ba1e18130e06e1ce1cd28c7d1caa5dca090083b97",
+      "n": 200,
+      "raw": {
+        "jev": {
+          "path": "results/raw/clinc150__jev.jsonl",
+          "sha256": "573eb59604a8b7f8f7db1c2e96765f6a3705aa9d44d5ae45b25d41f7a96a4021",
+          "n": 200,
+          "n_valid": 200,
+          "invalid_reasons": {}
+        },
+        "qwen3.5-4b": {
+          "path": "results/raw/clinc150__qwen3.5-4b.jsonl",
+          "sha256": "9e194c59d3e51edf67e530e945760a013a4ec82bb4791399aff2b89b9bcf0770",
+          "n": 200,
+          "n_valid": 199,
+          "invalid_reasons": {
+            "answer not in label set": 1
+          }
+        },
+        "qwen3.5-9b": {
+          "path": "results/raw/clinc150__qwen3.5-9b.jsonl",
+          "sha256": "0eafff84421d16dfedb68e42a38c9d4b050842a418487d11108adfa8a9bb832f",
+          "n": 200,
+          "n_valid": 199,
+          "invalid_reasons": {
+            "answer not in label set": 1
+          }
+        },
+        "qwen3.5-27b": {
+          "path": "results/raw/clinc150__qwen3.5-27b.jsonl",
+          "sha256": "c4042a7aab935622fc1fb88f66e8ff0c1d3420e7756ad515df5c87a57b09411c",
+          "n": 200,
+          "n_valid": 200,
+          "invalid_reasons": {}
+        },
+        "qwen3.5-35b": {
+          "path": "results/raw/clinc150__qwen3.5-35b.jsonl",
+          "sha256": "03268d609c6fc8ba9b4dc097f65608f69d51dad69156eadcac464162d8d6a938",
+          "n": 200,
+          "n_valid": 196,
+          "invalid_reasons": {
+            "network": 4
+          }
+        },
+        "qwen3.5-122b": {
+          "path": "results/raw/clinc150__qwen3.5-122b.jsonl",
+          "sha256": "6f8c612052044a9a201b4da99487d32c80f771015f06e8b6e49a4949e4029307",
+          "n": 200,
+          "n_valid": 193,
+          "invalid_reasons": {
+            "network": 7
+          }
+        },
+        "qwen3.8-27b": {
+          "path": "results/raw/clinc150__qwen3.8-27b.jsonl",
+          "sha256": "c575a32629c8d502a7e54c9bd5a4639010ec7a27fcabfffefdb3f52c900706ad",
+          "n": 200,
+          "n_valid": 200,
+          "invalid_reasons": {}
+        }
+      }
+    },
+    "sst5": {
+      "gold_path": "datasets/sst5.jsonl",
+      "gold_sha256": "74592bb801733e1b940854d91cff9fb07b2fd5bbe9d153ca4353b83dd1777282",
+      "n": 200,
+      "raw": {
+        "jev": {
+          "path": "results/raw/sst5__jev.jsonl",
+          "sha256": "8c575354a7db943a64024ea06b852466247115548b3c5ab383b51b300220d784",
+          "n": 200,
+          "n_valid": 200,
+          "invalid_reasons": {}
+        },
+        "qwen3.5-4b": {
+          "path": "results/raw/sst5__qwen3.5-4b.jsonl",
+          "sha256": "c1d92ab4dc98da33c20336d443aa2c4e0a799f483abc5a5dfd9be903a340ada2",
+          "n": 200,
+          "n_valid": 195,
+          "invalid_reasons": {
+            "bad score probabilities": 5
+          }
+        },
+        "qwen3.5-9b": {
+          "path": "results/raw/sst5__qwen3.5-9b.jsonl",
+          "sha256": "1548bcd5c2e6dc138b39dccc47c287342b3bbd6a5b5e3221eb1eb96492240d76",
+          "n": 200,
+          "n_valid": 198,
+          "invalid_reasons": {
+            "bad score probabilities": 2
+          }
+        },
+        "qwen3.5-27b": {
+          "path": "results/raw/sst5__qwen3.5-27b.jsonl",
+          "sha256": "6a70a13af833307b245caf5b25824ee9b4252c76bf3df9f7e5642bbb506de2dd",
+          "n": 200,
+          "n_valid": 199,
+          "invalid_reasons": {
+            "network": 1
+          }
+        },
+        "qwen3.5-35b": {
+          "path": "results/raw/sst5__qwen3.5-35b.jsonl",
+          "sha256": "c3e4750cba73a8176531b693262d68e1f41a1580fc0efe0d91383cde635e72c8",
+          "n": 200,
+          "n_valid": 200,
+          "invalid_reasons": {}
+        },
+        "qwen3.5-122b": {
+          "path": "results/raw/sst5__qwen3.5-122b.jsonl",
+          "sha256": "b6bf051abefb3390dba9fada0d9f7f7ab248c5844855f2fea25f974a808a883f",
+          "n": 200,
+          "n_valid": 200,
+          "invalid_reasons": {}
+        },
+        "qwen3.8-27b": {
+          "path": "results/raw/sst5__qwen3.8-27b.jsonl",
+          "sha256": "e23afd04b01ece22d15651522120dc34bc323f8760c2d796f51c9c1f3c51bc9b",
+          "n": 200,
+          "n_valid": 200,
+          "invalid_reasons": {}
+        }
+      }
+    },
+    "boolq": {
+      "gold_path": "datasets/boolq.jsonl",
+      "gold_sha256": "6743afe1653eed902c7521d912f8c942f069fd94f5a31aeea30c31039027f709",
+      "n": 200,
+      "raw": {
+        "jev": {
+          "path": "results/raw/boolq__jev.jsonl",
+          "sha256": "fe99de291534c7ef0753390f46994b483a8c587298a195244b3e1a35595de842",
+          "n": 200,
+          "n_valid": 200,
+          "invalid_reasons": {}
+        },
+        "qwen3.5-4b": {
+          "path": "results/raw/boolq__qwen3.5-4b.jsonl",
+          "sha256": "8ddf1de2707b7ef792f877b0366ca0db39dd792fa972ab109204c2b0b98307c6",
+          "n": 200,
+          "n_valid": 200,
+          "invalid_reasons": {}
+        },
+        "qwen3.5-9b": {
+          "path": "results/raw/boolq__qwen3.5-9b.jsonl",
+          "sha256": "61a3567e454879c3e3c2b8c68315a561a0005a1e5ee49ca2b3d1d50b10384686",
+          "n": 200,
+          "n_valid": 200,
+          "invalid_reasons": {}
+        },
+        "qwen3.5-27b": {
+          "path": "results/raw/boolq__qwen3.5-27b.jsonl",
+          "sha256": "57d707e94dfa462d5a333d9f37b67ca89d611411bb086aaa4b136de976b0c41d",
+          "n": 200,
+          "n_valid": 200,
+          "invalid_reasons": {}
+        },
+        "qwen3.5-35b": {
+          "path": "results/raw/boolq__qwen3.5-35b.jsonl",
+          "sha256": "c6f235a1a51060d382c500d516d78e14ed4f65fb52038d398db450c8746e838b",
+          "n": 200,
+          "n_valid": 200,
+          "invalid_reasons": {}
+        },
+        "qwen3.5-122b": {
+          "path": "results/raw/boolq__qwen3.5-122b.jsonl",
+          "sha256": "1081411f35607a6815f90900bd3f359e218a9255b66323932cc139c005f14e31",
+          "n": 200,
+          "n_valid": 200,
+          "invalid_reasons": {}
+        },
+        "qwen3.8-27b": {
+          "path": "results/raw/boolq__qwen3.8-27b.jsonl",
+          "sha256": "72b033626f4dabcd84c0733ec53db02a69254b602e1533f3ff4ed3bed0f82052",
+          "n": 200,
+          "n_valid": 200,
+          "invalid_reasons": {}
+        }
+      }
+    },
+    "agnews": {
+      "gold_path": "datasets/agnews.jsonl",
+      "gold_sha256": "b9d554701d436af901ffd9240503c3ff8ce05efd0ed4c0fba2ae53fe1a5b9cf8",
+      "n": 150,
+      "raw": {
+        "jev": {
+          "path": "results/raw/agnews__jev.jsonl",
+          "sha256": "5cffcc51ac0e1019da6b210514d799544ba7fa084ab34ade8e0ec7345623a284",
+          "n": 150,
+          "n_valid": 150,
+          "invalid_reasons": {}
+        },
+        "qwen3.5-4b": {
+          "path": "results/raw/agnews__qwen3.5-4b.jsonl",
+          "sha256": "e793c6b807af7bfe652c6616095aceb45922cb0dfd8f13403114d948aaf217d7",
+          "n": 150,
+          "n_valid": 150,
+          "invalid_reasons": {}
+        },
+        "qwen3.5-9b": {
+          "path": "results/raw/agnews__qwen3.5-9b.jsonl",
+          "sha256": "8d88c0c475eabc439729e3f030efd49730816066fd62fb8f6b1329716240bd2e",
+          "n": 150,
+          "n_valid": 150,
+          "invalid_reasons": {}
+        },
+        "qwen3.5-27b": {
+          "path": "results/raw/agnews__qwen3.5-27b.jsonl",
+          "sha256": "f19eae3960040d23db31a1f041b0c07cfe75647be1dbce3abf78acd5a17277b2",
+          "n": 150,
+          "n_valid": 150,
+          "invalid_reasons": {}
+        },
+        "qwen3.5-35b": {
+          "path": "results/raw/agnews__qwen3.5-35b.jsonl",
+          "sha256": "37f6372413a381596e6fca6a8bf5dedef164230baf1b36c982560f40f2de40d7",
+          "n": 150,
+          "n_valid": 150,
+          "invalid_reasons": {}
+        },
+        "qwen3.5-122b": {
+          "path": "results/raw/agnews__qwen3.5-122b.jsonl",
+          "sha256": "4db8dcad08b42aba12c86d6660dddd77856b64d1a7df62bd03ce2e7522fe5ba0",
+          "n": 150,
+          "n_valid": 150,
+          "invalid_reasons": {}
+        },
+        "qwen3.8-27b": {
+          "path": "results/raw/agnews__qwen3.8-27b.jsonl",
+          "sha256": "a509779e9d626c36b0df0f04e0d3bca56d65312c58e36822409f10ea9f28dd3a",
+          "n": 150,
+          "n_valid": 150,
+          "invalid_reasons": {}
+        }
+      }
+    }
+  },
+  "comparisons": [
+    {
+      "candidate": "qwen3.5-4b",
+      "jev_macro_accuracy": 0.7936666666666666,
+      "candidate_macro_accuracy": 0.6913333333333334,
+      "difference_candidate_minus_jev": -0.10233333333333335,
+      "paired_stratified_bootstrap_95_ci": [
+        -0.12866666666666665,
+        -0.076
+      ],
+      "permutation_p": {
+        "candidate_superior_one_sided": 1.0,
+        "jev_superior_one_sided": 0.0001999600079984003,
+        "two_sided": 0.0001999600079984003
+      },
+      "planned_upper_family_bonferroni_p": null,
+      "by_dataset": [
+        {
+          "dataset": "banking77",
+          "n": 300,
+          "jev_correct": 233,
+          "candidate_correct": 193,
+          "jev_accuracy": 0.7766666666666666,
+          "candidate_accuracy": 0.6433333333333333,
+          "difference_candidate_minus_jev": -0.13333333333333333,
+          "paired_bootstrap_95_ci": [
+            -0.18333333333333332,
+            -0.08333333333333333
+          ],
+          "mcnemar": {
+            "reference_only_correct": 52,
+            "candidate_only_correct": 12,
+            "two_sided_p": 4.5666107004454105e-07
+          }
+        },
+        {
+          "dataset": "clinc150",
+          "n": 200,
+          "jev_correct": 181,
+          "candidate_correct": 147,
+          "jev_accuracy": 0.905,
+          "candidate_accuracy": 0.735,
+          "difference_candidate_minus_jev": -0.17,
+          "paired_bootstrap_95_ci": [
+            -0.235,
+            -0.105
+          ],
+          "mcnemar": {
+            "reference_only_correct": 41,
+            "candidate_only_correct": 7,
+            "two_sided_p": 6.240408438884515e-07
+          }
+        },
+        {
+          "dataset": "sst5",
+          "n": 200,
+          "jev_correct": 106,
+          "candidate_correct": 86,
+          "jev_accuracy": 0.53,
+          "candidate_accuracy": 0.43,
+          "difference_candidate_minus_jev": -0.1,
+          "paired_bootstrap_95_ci": [
+            -0.175,
+            -0.025
+          ],
+          "mcnemar": {
+            "reference_only_correct": 40,
+            "candidate_only_correct": 20,
+            "two_sided_p": 0.01348929373119186
+          }
+        },
+        {
+          "dataset": "boolq",
+          "n": 200,
+          "jev_correct": 178,
+          "candidate_correct": 167,
+          "jev_accuracy": 0.89,
+          "candidate_accuracy": 0.835,
+          "difference_candidate_minus_jev": -0.055,
+          "paired_bootstrap_95_ci": [
+            -0.1,
+            -0.01
+          ],
+          "mcnemar": {
+            "reference_only_correct": 17,
+            "candidate_only_correct": 6,
+            "two_sided_p": 0.03468966484069824
+          }
+        },
+        {
+          "dataset": "agnews",
+          "n": 150,
+          "jev_correct": 130,
+          "candidate_correct": 122,
+          "jev_accuracy": 0.8666666666666667,
+          "candidate_accuracy": 0.8133333333333334,
+          "difference_candidate_minus_jev": -0.05333333333333334,
+          "paired_bootstrap_95_ci": [
+            -0.10666666666666667,
+            -0.006666666666666667
+          ],
+          "mcnemar": {
+            "reference_only_correct": 12,
+            "candidate_only_correct": 4,
+            "two_sided_p": 0.076812744140625
+          }
+        }
+      ]
+    },
+    {
+      "candidate": "qwen3.5-9b",
+      "jev_macro_accuracy": 0.7936666666666666,
+      "candidate_macro_accuracy": 0.7283333333333333,
+      "difference_candidate_minus_jev": -0.06533333333333333,
+      "paired_stratified_bootstrap_95_ci": [
+        -0.08966666666666666,
+        -0.04133333333333333
+      ],
+      "permutation_p": {
+        "candidate_superior_one_sided": 1.0,
+        "jev_superior_one_sided": 0.0001999600079984003,
+        "two_sided": 0.0001999600079984003
+      },
+      "planned_upper_family_bonferroni_p": null,
+      "by_dataset": [
+        {
+          "dataset": "banking77",
+          "n": 300,
+          "jev_correct": 233,
+          "candidate_correct": 208,
+          "jev_accuracy": 0.7766666666666666,
+          "candidate_accuracy": 0.6933333333333334,
+          "difference_candidate_minus_jev": -0.08333333333333333,
+          "paired_bootstrap_95_ci": [
+            -0.12666666666666668,
+            -0.04
+          ],
+          "mcnemar": {
+            "reference_only_correct": 35,
+            "candidate_only_correct": 10,
+            "two_sided_p": 0.00024708778460080794
+          }
+        },
+        {
+          "dataset": "clinc150",
+          "n": 200,
+          "jev_correct": 181,
+          "candidate_correct": 166,
+          "jev_accuracy": 0.905,
+          "candidate_accuracy": 0.83,
+          "difference_candidate_minus_jev": -0.075,
+          "paired_bootstrap_95_ci": [
+            -0.13,
+            -0.02
+          ],
+          "mcnemar": {
+            "reference_only_correct": 23,
+            "candidate_only_correct": 8,
+            "two_sided_p": 0.010673840530216694
+          }
+        },
+        {
+          "dataset": "sst5",
+          "n": 200,
+          "jev_correct": 106,
+          "candidate_correct": 98,
+          "jev_accuracy": 0.53,
+          "candidate_accuracy": 0.49,
+          "difference_candidate_minus_jev": -0.04,
+          "paired_bootstrap_95_ci": [
+            -0.105,
+            0.025
+          ],
+          "mcnemar": {
+            "reference_only_correct": 26,
+            "candidate_only_correct": 18,
+            "two_sided_p": 0.2912152365458951
+          }
+        },
+        {
+          "dataset": "boolq",
+          "n": 200,
+          "jev_correct": 178,
+          "candidate_correct": 171,
+          "jev_accuracy": 0.89,
+          "candidate_accuracy": 0.855,
+          "difference_candidate_minus_jev": -0.035,
+          "paired_bootstrap_95_ci": [
+            -0.08,
+            0.005
+          ],
+          "mcnemar": {
+            "reference_only_correct": 13,
+            "candidate_only_correct": 6,
+            "two_sided_p": 0.1670684814453125
+          }
+        },
+        {
+          "dataset": "agnews",
+          "n": 150,
+          "jev_correct": 130,
+          "candidate_correct": 116,
+          "jev_accuracy": 0.8666666666666667,
+          "candidate_accuracy": 0.7733333333333333,
+          "difference_candidate_minus_jev": -0.09333333333333334,
+          "paired_bootstrap_95_ci": [
+            -0.15333333333333332,
+            -0.04
+          ],
+          "mcnemar": {
+            "reference_only_correct": 17,
+            "candidate_only_correct": 3,
+            "two_sided_p": 0.0025768280029296875
+          }
+        }
+      ]
+    },
+    {
+      "candidate": "qwen3.5-27b",
+      "jev_macro_accuracy": 0.7936666666666666,
+      "candidate_macro_accuracy": 0.7966666666666666,
+      "difference_candidate_minus_jev": 0.003,
+      "paired_stratified_bootstrap_95_ci": [
+        -0.017,
+        0.024333333333333332
+      ],
+      "permutation_p": {
+        "candidate_superior_one_sided": 0.40451909618076387,
+        "jev_superior_one_sided": 0.6192761447710458,
+        "two_sided": 0.8012397520495901
+      },
+      "planned_upper_family_bonferroni_p": null,
+      "by_dataset": [
+        {
+          "dataset": "banking77",
+          "n": 300,
+          "jev_correct": 233,
+          "candidate_correct": 234,
+          "jev_accuracy": 0.7766666666666666,
+          "candidate_accuracy": 0.78,
+          "difference_candidate_minus_jev": 0.0033333333333333335,
+          "paired_bootstrap_95_ci": [
+            -0.03666666666666667,
+            0.043333333333333335
+          ],
+          "mcnemar": {
+            "reference_only_correct": 19,
+            "candidate_only_correct": 20,
+            "two_sided_p": 1.0
+          }
+        },
+        {
+          "dataset": "clinc150",
+          "n": 200,
+          "jev_correct": 181,
+          "candidate_correct": 177,
+          "jev_accuracy": 0.905,
+          "candidate_accuracy": 0.885,
+          "difference_candidate_minus_jev": -0.02,
+          "paired_bootstrap_95_ci": [
+            -0.06,
+            0.02
+          ],
+          "mcnemar": {
+            "reference_only_correct": 10,
+            "candidate_only_correct": 6,
+            "two_sided_p": 0.454498291015625
+          }
+        },
+        {
+          "dataset": "sst5",
+          "n": 200,
+          "jev_correct": 106,
+          "candidate_correct": 116,
+          "jev_accuracy": 0.53,
+          "candidate_accuracy": 0.58,
+          "difference_candidate_minus_jev": 0.05,
+          "paired_bootstrap_95_ci": [
+            -0.015,
+            0.115
+          ],
+          "mcnemar": {
+            "reference_only_correct": 18,
+            "candidate_only_correct": 28,
+            "two_sided_p": 0.18392482137699062
+          }
+        },
+        {
+          "dataset": "boolq",
+          "n": 200,
+          "jev_correct": 178,
+          "candidate_correct": 173,
+          "jev_accuracy": 0.89,
+          "candidate_accuracy": 0.865,
+          "difference_candidate_minus_jev": -0.025,
+          "paired_bootstrap_95_ci": [
+            -0.065,
+            0.01
+          ],
+          "mcnemar": {
+            "reference_only_correct": 10,
+            "candidate_only_correct": 5,
+            "two_sided_p": 0.3017578125
+          }
+        },
+        {
+          "dataset": "agnews",
+          "n": 150,
+          "jev_correct": 130,
+          "candidate_correct": 131,
+          "jev_accuracy": 0.8666666666666667,
+          "candidate_accuracy": 0.8733333333333333,
+          "difference_candidate_minus_jev": 0.006666666666666667,
+          "paired_bootstrap_95_ci": [
+            -0.03333333333333333,
+            0.04666666666666667
+          ],
+          "mcnemar": {
+            "reference_only_correct": 4,
+            "candidate_only_correct": 5,
+            "two_sided_p": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "candidate": "qwen3.5-35b",
+      "jev_macro_accuracy": 0.7936666666666666,
+      "candidate_macro_accuracy": 0.755,
+      "difference_candidate_minus_jev": -0.03866666666666667,
+      "paired_stratified_bootstrap_95_ci": [
+        -0.06133333333333333,
+        -0.016
+      ],
+      "permutation_p": {
+        "candidate_superior_one_sided": 0.9996000799840032,
+        "jev_superior_one_sided": 0.0009998000399920016,
+        "two_sided": 0.0015996800639872025
+      },
+      "planned_upper_family_bonferroni_p": null,
+      "by_dataset": [
+        {
+          "dataset": "banking77",
+          "n": 300,
+          "jev_correct": 233,
+          "candidate_correct": 223,
+          "jev_accuracy": 0.7766666666666666,
+          "candidate_accuracy": 0.7433333333333333,
+          "difference_candidate_minus_jev": -0.03333333333333333,
+          "paired_bootstrap_95_ci": [
+            -0.07333333333333333,
+            0.006666666666666667
+          ],
+          "mcnemar": {
+            "reference_only_correct": 24,
+            "candidate_only_correct": 14,
+            "two_sided_p": 0.14330665429588407
+          }
+        },
+        {
+          "dataset": "clinc150",
+          "n": 200,
+          "jev_correct": 181,
+          "candidate_correct": 168,
+          "jev_accuracy": 0.905,
+          "candidate_accuracy": 0.84,
+          "difference_candidate_minus_jev": -0.065,
+          "paired_bootstrap_95_ci": [
+            -0.12,
+            -0.015
+          ],
+          "mcnemar": {
+            "reference_only_correct": 21,
+            "candidate_only_correct": 8,
+            "two_sided_p": 0.0241195447742939
+          }
+        },
+        {
+          "dataset": "sst5",
+          "n": 200,
+          "jev_correct": 106,
+          "candidate_correct": 97,
+          "jev_accuracy": 0.53,
+          "candidate_accuracy": 0.485,
+          "difference_candidate_minus_jev": -0.045,
+          "paired_bootstrap_95_ci": [
+            -0.115,
+            0.025
+          ],
+          "mcnemar": {
+            "reference_only_correct": 30,
+            "candidate_only_correct": 21,
+            "two_sided_p": 0.2624375357110438
+          }
+        },
+        {
+          "dataset": "boolq",
+          "n": 200,
+          "jev_correct": 178,
+          "candidate_correct": 176,
+          "jev_accuracy": 0.89,
+          "candidate_accuracy": 0.88,
+          "difference_candidate_minus_jev": -0.01,
+          "paired_bootstrap_95_ci": [
+            -0.045,
+            0.025
+          ],
+          "mcnemar": {
+            "reference_only_correct": 7,
+            "candidate_only_correct": 5,
+            "two_sided_p": 0.7744140625
+          }
+        },
+        {
+          "dataset": "agnews",
+          "n": 150,
+          "jev_correct": 130,
+          "candidate_correct": 124,
+          "jev_accuracy": 0.8666666666666667,
+          "candidate_accuracy": 0.8266666666666667,
+          "difference_candidate_minus_jev": -0.04,
+          "paired_bootstrap_95_ci": [
+            -0.09333333333333334,
+            0.006666666666666667
+          ],
+          "mcnemar": {
+            "reference_only_correct": 10,
+            "candidate_only_correct": 4,
+            "two_sided_p": 0.1795654296875
+          }
+        }
+      ]
+    },
+    {
+      "candidate": "qwen3.5-122b",
+      "jev_macro_accuracy": 0.7936666666666666,
+      "candidate_macro_accuracy": 0.7736666666666666,
+      "difference_candidate_minus_jev": -0.02,
+      "paired_stratified_bootstrap_95_ci": [
+        -0.043,
+        0.003
+      ],
+      "permutation_p": {
+        "candidate_superior_one_sided": 0.9632073585282943,
+        "jev_superior_one_sided": 0.04079184163167367,
+        "two_sided": 0.08758248350329934
+      },
+      "planned_upper_family_bonferroni_p": null,
+      "by_dataset": [
+        {
+          "dataset": "banking77",
+          "n": 300,
+          "jev_correct": 233,
+          "candidate_correct": 217,
+          "jev_accuracy": 0.7766666666666666,
+          "candidate_accuracy": 0.7233333333333334,
+          "difference_candidate_minus_jev": -0.05333333333333334,
+          "paired_bootstrap_95_ci": [
+            -0.09666666666666666,
+            -0.01
+          ],
+          "mcnemar": {
+            "reference_only_correct": 29,
+            "candidate_only_correct": 13,
+            "two_sided_p": 0.019520472782460274
+          }
+        },
+        {
+          "dataset": "clinc150",
+          "n": 200,
+          "jev_correct": 181,
+          "candidate_correct": 173,
+          "jev_accuracy": 0.905,
+          "candidate_accuracy": 0.865,
+          "difference_candidate_minus_jev": -0.04,
+          "paired_bootstrap_95_ci": [
+            -0.085,
+            0.005
+          ],
+          "mcnemar": {
+            "reference_only_correct": 15,
+            "candidate_only_correct": 7,
+            "two_sided_p": 0.13380050659179688
+          }
+        },
+        {
+          "dataset": "sst5",
+          "n": 200,
+          "jev_correct": 106,
+          "candidate_correct": 110,
+          "jev_accuracy": 0.53,
+          "candidate_accuracy": 0.55,
+          "difference_candidate_minus_jev": 0.02,
+          "paired_bootstrap_95_ci": [
+            -0.055,
+            0.095
+          ],
+          "mcnemar": {
+            "reference_only_correct": 29,
+            "candidate_only_correct": 33,
+            "two_sided_p": 0.7035366713552734
+          }
+        },
+        {
+          "dataset": "boolq",
+          "n": 200,
+          "jev_correct": 178,
+          "candidate_correct": 174,
+          "jev_accuracy": 0.89,
+          "candidate_accuracy": 0.87,
+          "difference_candidate_minus_jev": -0.02,
+          "paired_bootstrap_95_ci": [
+            -0.055,
+            0.01
+          ],
+          "mcnemar": {
+            "reference_only_correct": 8,
+            "candidate_only_correct": 4,
+            "two_sided_p": 0.3876953125
+          }
+        },
+        {
+          "dataset": "agnews",
+          "n": 150,
+          "jev_correct": 130,
+          "candidate_correct": 129,
+          "jev_accuracy": 0.8666666666666667,
+          "candidate_accuracy": 0.86,
+          "difference_candidate_minus_jev": -0.006666666666666667,
+          "paired_bootstrap_95_ci": [
+            -0.05333333333333334,
+            0.04
+          ],
+          "mcnemar": {
+            "reference_only_correct": 6,
+            "candidate_only_correct": 5,
+            "two_sided_p": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "candidate": "qwen3.8-27b",
+      "jev_macro_accuracy": 0.7936666666666666,
+      "candidate_macro_accuracy": 0.7833333333333334,
+      "difference_candidate_minus_jev": -0.010333333333333333,
+      "paired_stratified_bootstrap_95_ci": [
+        -0.03,
+        0.009333333333333334
+      ],
+      "permutation_p": {
+        "candidate_superior_one_sided": 0.8440311937612478,
+        "jev_superior_one_sided": 0.17176564687062587,
+        "two_sided": 0.3245350929814037
+      },
+      "planned_upper_family_bonferroni_p": 0.8440311937612478,
+      "by_dataset": [
+        {
+          "dataset": "banking77",
+          "n": 300,
+          "jev_correct": 233,
+          "candidate_correct": 230,
+          "jev_accuracy": 0.7766666666666666,
+          "candidate_accuracy": 0.7666666666666667,
+          "difference_candidate_minus_jev": -0.01,
+          "paired_bootstrap_95_ci": [
+            -0.05,
+            0.03
+          ],
+          "mcnemar": {
+            "reference_only_correct": 20,
+            "candidate_only_correct": 17,
+            "two_sided_p": 0.7428293587290682
+          }
+        },
+        {
+          "dataset": "clinc150",
+          "n": 200,
+          "jev_correct": 181,
+          "candidate_correct": 177,
+          "jev_accuracy": 0.905,
+          "candidate_accuracy": 0.885,
+          "difference_candidate_minus_jev": -0.02,
+          "paired_bootstrap_95_ci": [
+            -0.06,
+            0.02
+          ],
+          "mcnemar": {
+            "reference_only_correct": 11,
+            "candidate_only_correct": 7,
+            "two_sided_p": 0.480682373046875
+          }
+        },
+        {
+          "dataset": "sst5",
+          "n": 200,
+          "jev_correct": 106,
+          "candidate_correct": 106,
+          "jev_accuracy": 0.53,
+          "candidate_accuracy": 0.53,
+          "difference_candidate_minus_jev": 0.0,
+          "paired_bootstrap_95_ci": [
+            -0.06,
+            0.06
+          ],
+          "mcnemar": {
+            "reference_only_correct": 19,
+            "candidate_only_correct": 19,
+            "two_sided_p": 1.0
+          }
+        },
+        {
+          "dataset": "boolq",
+          "n": 200,
+          "jev_correct": 178,
+          "candidate_correct": 175,
+          "jev_accuracy": 0.89,
+          "candidate_accuracy": 0.875,
+          "difference_candidate_minus_jev": -0.015,
+          "paired_bootstrap_95_ci": [
+            -0.055,
+            0.025
+          ],
+          "mcnemar": {
+            "reference_only_correct": 9,
+            "candidate_only_correct": 6,
+            "two_sided_p": 0.60723876953125
+          }
+        },
+        {
+          "dataset": "agnews",
+          "n": 150,
+          "jev_correct": 130,
+          "candidate_correct": 129,
+          "jev_accuracy": 0.8666666666666667,
+          "candidate_accuracy": 0.86,
+          "difference_candidate_minus_jev": -0.006666666666666667,
+          "paired_bootstrap_95_ci": [
+            -0.04666666666666667,
+            0.03333333333333333
+          ],
+          "mcnemar": {
+            "reference_only_correct": 5,
+            "candidate_only_correct": 4,
+            "two_sided_p": 1.0
+          }
+        }
+      ]
+    }
+  ]
+}

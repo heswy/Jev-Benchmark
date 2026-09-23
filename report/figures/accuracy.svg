@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 502" role="img" aria-labelledby="title desc">
+<title id="title">Benchmark accuracy and paired uncertainty</title>
+<desc id="desc">Five-dataset equal-weight accuracy for seven models. Right panel shows each candidate minus Jev with paired 95% bootstrap intervals.</desc>
+<style>text{font-family:Inter,Arial,sans-serif;fill:#1e293b} .muted{fill:#64748b}.grid{stroke:#dbe2ea;stroke-width:1}.blue{fill:#3062c4}.orange{fill:#b76027}.thin{stroke:#1e293b;stroke-width:2}</style>
+<text x="32" y="41" font-size="25" font-weight="700">Five-dataset accuracy</text>
+<text x="32" y="64" font-size="13" class="muted">End-to-end; equal dataset weights; 1,050 items per model</text>
+<line x1="196.0" y1="96" x2="196.0" y2="430" class="grid"/>
+<text x="196.0" y="89" font-size="11" text-anchor="middle" class="muted">0%</text>
+<line x1="296.0" y1="96" x2="296.0" y2="430" class="grid"/>
+<text x="296.0" y="89" font-size="11" text-anchor="middle" class="muted">25%</text>
+<line x1="396.0" y1="96" x2="396.0" y2="430" class="grid"/>
+<text x="396.0" y="89" font-size="11" text-anchor="middle" class="muted">50%</text>
+<line x1="496.0" y1="96" x2="496.0" y2="430" class="grid"/>
+<text x="496.0" y="89" font-size="11" text-anchor="middle" class="muted">75%</text>
+<line x1="596.0" y1="96" x2="596.0" y2="430" class="grid"/>
+<text x="596.0" y="89" font-size="11" text-anchor="middle" class="muted">100%</text>
+<text x="750" y="89" font-size="11" class="muted">Difference vs Jev (percentage points), 95% paired CI</text>
+<line x1="750.0" y1="103" x2="750.0" y2="430" class="grid"/>
+<text x="750.0" y="447" font-size="11" text-anchor="middle" class="muted">-15</text>
+<line x1="821.25" y1="103" x2="821.25" y2="430" class="grid"/>
+<text x="821.25" y="447" font-size="11" text-anchor="middle" class="muted">-10</text>
+<line x1="892.5" y1="103" x2="892.5" y2="430" class="grid"/>
+<text x="892.5" y="447" font-size="11" text-anchor="middle" class="muted">-5</text>
+<line x1="963.75" y1="103" x2="963.75" y2="430" class="grid"/>
+<text x="963.75" y="447" font-size="11" text-anchor="middle" class="muted">0</text>
+<line x1="1035.0" y1="103" x2="1035.0" y2="430" class="grid"/>
+<text x="1035.0" y="447" font-size="11" text-anchor="middle" class="muted">+5</text>
+<text x="32" y="127" font-size="13" font-weight="400">Qwen3.5 27B</text>
+<rect x="196" y="113" width="318.67" height="18" rx="2" fill="#8694a7"/>
+<text x="610" y="127" font-size="13" font-weight="600">79.67%</text>
+<line x1="939.52" y1="123" x2="998.42" y2="123" class="thin"/>
+<line x1="939.52" y1="118" x2="939.52" y2="128" class="thin"/>
+<line x1="998.42" y1="118" x2="998.42" y2="128" class="thin"/>
+<circle cx="968.02" cy="123" r="5" fill="#b76027"/>
+<text x="32" y="174" font-size="13" font-weight="600">Jev 1.13</text>
+<rect x="196" y="160" width="317.47" height="18" rx="2" fill="#3062c4"/>
+<text x="610" y="174" font-size="13" font-weight="600">79.37%</text>
+<text x="750" y="174" font-size="12" class="muted">reference</text>
+<text x="32" y="221" font-size="13" font-weight="400">Qwen3.8 27B</text>
+<rect x="196" y="207" width="313.33" height="18" rx="2" fill="#8694a7"/>
+<text x="610" y="221" font-size="13" font-weight="600">78.33%</text>
+<line x1="921.00" y1="217" x2="977.05" y2="217" class="thin"/>
+<line x1="921.00" y1="212" x2="921.00" y2="222" class="thin"/>
+<line x1="977.05" y1="212" x2="977.05" y2="222" class="thin"/>
+<circle cx="949.02" cy="217" r="5" fill="#b76027"/>
+<text x="32" y="268" font-size="13" font-weight="400">Qwen3.5 122B-A10B</text>
+<rect x="196" y="254" width="309.47" height="18" rx="2" fill="#8694a7"/>
+<text x="610" y="268" font-size="13" font-weight="600">77.37%</text>
+<line x1="902.47" y1="264" x2="968.02" y2="264" class="thin"/>
+<line x1="902.47" y1="259" x2="902.47" y2="269" class="thin"/>
+<line x1="968.02" y1="259" x2="968.02" y2="269" class="thin"/>
+<circle cx="935.25" cy="264" r="5" fill="#b76027"/>
+<text x="32" y="315" font-size="13" font-weight="400">Qwen3.5 35B-A3B</text>
+<rect x="196" y="301" width="302.00" height="18" rx="2" fill="#8694a7"/>
+<text x="610" y="315" font-size="13" font-weight="600">75.50%</text>
+<line x1="876.35" y1="311" x2="940.95" y2="311" class="thin"/>
+<line x1="876.35" y1="306" x2="876.35" y2="316" class="thin"/>
+<line x1="940.95" y1="306" x2="940.95" y2="316" class="thin"/>
+<circle cx="908.65" cy="311" r="5" fill="#b76027"/>
+<text x="32" y="362" font-size="13" font-weight="400">Qwen3.5 9B</text>
+<rect x="196" y="348" width="291.33" height="18" rx="2" fill="#8694a7"/>
+<text x="610" y="362" font-size="13" font-weight="600">72.83%</text>
+<line x1="835.98" y1="358" x2="904.85" y2="358" class="thin"/>
+<line x1="835.98" y1="353" x2="835.98" y2="363" class="thin"/>
+<line x1="904.85" y1="353" x2="904.85" y2="363" class="thin"/>
+<circle cx="870.65" cy="358" r="5" fill="#b76027"/>
+<text x="32" y="409" font-size="13" font-weight="400">Qwen3.5 4B</text>
+<rect x="196" y="395" width="276.53" height="18" rx="2" fill="#8694a7"/>
+<text x="610" y="409" font-size="13" font-weight="600">69.13%</text>
+<line x1="780.40" y1="405" x2="855.45" y2="405" class="thin"/>
+<line x1="780.40" y1="400" x2="780.40" y2="410" class="thin"/>
+<line x1="855.45" y1="400" x2="855.45" y2="410" class="thin"/>
+<circle cx="817.92" cy="405" r="5" fill="#b76027"/>
+<text x="32" y="480" font-size="12" class="muted">Bars start at 0. Intervals are for the paired difference, not each model&#x27;s standalone accuracy.</text>
+</svg>

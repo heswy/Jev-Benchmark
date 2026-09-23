@@ -1,0 +1,70 @@
+{
+  "run_id": "20260923T005308Z",
+  "status": "complete",
+  "command": "python3 -u -m jevbench.runner --models qwen3.8-27b --datasets banking77 clinc150 sst5 boolq agnews --concurrency 6 --tag upper-qwen38-27b-v1",
+  "model_id": "qwen3.8-27b",
+  "provider": "siliconflow",
+  "provider_model_id": "Qwen/Qwen3.8-27B",
+  "datasets": [
+    "banking77",
+    "clinc150",
+    "sst5",
+    "boolq",
+    "agnews"
+  ],
+  "settings": {
+    "temperature": 0.0,
+    "enable_thinking": false,
+    "max_tokens": 800,
+    "network_retries": 4,
+    "oos_tau": 0.35,
+    "response_format": "json_object",
+    "concurrency": 6
+  },
+  "source_sha256": {
+    "jevbench/config.py": "00fa9f7ab7170fd2fefd811112b2dac1c4b0e553db9f5063ae3b81c399e6ac24",
+    "jevbench/prompts.py": "1ee1d62bec8cb4f612550f674a9df1340228c8f019e0d755fe3da2d171e1b740",
+    "jevbench/adapters.py": "f0e643aed93129e7cd528bae98daadb4a988078db9b3791590ec61ccc65092b5",
+    "jevbench/runner.py": "e046632da90378f96a3bef7c0533eab0b85a8fbb9e1fd6996d6496f6cf638d8b",
+    "jevbench/schemas.py": "20357f0ab06ec4061f3274474f26694e4b0abaa8ba850e20440245bc2fc90d15"
+  },
+  "gold_sha256": {
+    "banking77": "0862f30acbb35c6b4429a8cf76f2a86884df39959a751090308982fe0140ed80",
+    "clinc150": "aaac80ce9be550f522d4163ba1e18130e06e1ce1cd28c7d1caa5dca090083b97",
+    "sst5": "74592bb801733e1b940854d91cff9fb07b2fd5bbe9d153ca4353b83dd1777282",
+    "boolq": "6743afe1653eed902c7521d912f8c942f069fd94f5a31aeea30c31039027f709",
+    "agnews": "b9d554701d436af901ffd9240503c3ff8ce05efd0ed4c0fba2ae53fe1a5b9cf8"
+  },
+  "python": "3.14.3",
+  "created_at_utc": "2026-09-23T00:53:25.978209+00:00",
+  "note": "runner tag precedence bug will label full run as full despite requested tag; command recorded above. Raw files are incremental checkpoints. The generated summary reports zero USD cost because the old runner had no USD list price for this SiliconFlow model; later aggregate reports cost unavailable.",
+  "raw_snapshots": {
+    "banking77": {
+      "path": "results/runs/20260923T005308Z_upper-qwen38-27b-v1/raw/banking77__qwen3.8-27b.jsonl",
+      "sha256": "3c83fd15a2487e3ba267523951163f7d2c78a1a882806d3f8a1cfe47d37c2485",
+      "n_rows": 300
+    },
+    "clinc150": {
+      "path": "results/runs/20260923T005308Z_upper-qwen38-27b-v1/raw/clinc150__qwen3.8-27b.jsonl",
+      "sha256": "c575a32629c8d502a7e54c9bd5a4639010ec7a27fcabfffefdb3f52c900706ad",
+      "n_rows": 200
+    },
+    "sst5": {
+      "path": "results/runs/20260923T005308Z_upper-qwen38-27b-v1/raw/sst5__qwen3.8-27b.jsonl",
+      "sha256": "e23afd04b01ece22d15651522120dc34bc323f8760c2d796f51c9c1f3c51bc9b",
+      "n_rows": 200
+    },
+    "boolq": {
+      "path": "results/runs/20260923T005308Z_upper-qwen38-27b-v1/raw/boolq__qwen3.8-27b.jsonl",
+      "sha256": "72b033626f4dabcd84c0733ec53db02a69254b602e1533f3ff4ed3bed0f82052",
+      "n_rows": 200
+    },
+    "agnews": {
+      "path": "results/runs/20260923T005308Z_upper-qwen38-27b-v1/raw/agnews__qwen3.8-27b.jsonl",
+      "sha256": "a509779e9d626c36b0df0f04e0d3bca56d65312c58e36822409f10ea9f28dd3a",
+      "n_rows": 150
+    }
+  },
+  "archive_path": "results/runs/20260923T005308Z_upper-qwen38-27b-v1",
+  "summary_as_generated_sha256": "5f44441f78c7fb1a463e9db1fb36e0fffbffec071fa3bc0cba83211cb54de546"
+}
